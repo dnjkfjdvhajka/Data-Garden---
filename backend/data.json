@@ -1,0 +1,28 @@
+{
+  "garden_data": [
+    {"hour": 0, "decibel": 25, "light": 5, "temperature": 18, "sound_type": "寂静", "scene": "深夜卧室"},
+    {"hour": 1, "decibel": 22, "light": 0, "temperature": 17, "sound_type": "微鼾", "scene": "深夜卧室"},
+    {"hour": 2, "decibel": 20, "light": 0, "temperature": 17, "sound_type": "寂静", "scene": "深夜卧室"},
+    {"hour": 3, "decibel": 18, "light": 0, "temperature": 16, "sound_type": "寂静", "scene": "深夜卧室"},
+    {"hour": 4, "decibel": 23, "light": 2, "temperature": 16, "sound_type": "鸟鸣", "scene": "黎明窗外"},
+    {"hour": 5, "decibel": 35, "light": 15, "temperature": 17, "sound_type": "鸟鸣", "scene": "清晨公园"},
+    {"hour": 6, "decibel": 45, "light": 35, "temperature": 19, "sound_type": "人声", "scene": "早餐厨房"},
+    {"hour": 7, "decibel": 55, "light": 55, "temperature": 21, "sound_type": "车流", "scene": "通勤路上"},
+    {"hour": 8, "decibel": 62, "light": 70, "temperature": 23, "sound_type": "键盘", "scene": "办公室"},
+    {"hour": 9, "decibel": 58, "light": 75, "temperature": 24, "sound_type": "交谈", "scene": "会议室"},
+    {"hour": 10, "decibel": 52, "light": 80, "temperature": 25, "sound_type": "键盘", "scene": "办公室"},
+    {"hour": 11, "decibel": 48, "light": 85, "temperature": 26, "sound_type": "脚步", "scene": "走廊"},
+    {"hour": 12, "decibel": 65, "light": 90, "temperature": 28, "sound_type": "人声", "scene": "餐厅"},
+    {"hour": 13, "decibel": 55, "light": 88, "temperature": 29, "sound_type": "风声", "scene": "户外散步"},
+    {"hour": 14, "decibel": 50, "light": 82, "temperature": 30, "sound_type": "蝉鸣", "scene": "树荫下"},
+    {"hour": 15, "decibel": 48, "light": 75, "temperature": 29, "sound_type": "键盘", "scene": "办公室"},
+    {"hour": 16, "decibel": 52, "light": 65, "temperature": 28, "sound_type": "交谈", "scene": "茶水间"},
+    {"hour": 17, "decibel": 60, "light": 50, "temperature": 27, "sound_type": "车流", "scene": "下班路上"},
+    {"hour": 18, "decibel": 58, "light": 35, "temperature": 26, "sound_type": "人声", "scene": "超市"},
+    {"hour": 19, "decibel": 50, "light": 20, "temperature": 25, "sound_type": "锅铲", "scene": "厨房烹饪"},
+    {"hour": 20, "decibel": 42, "light": 10, "temperature": 24, "sound_type": "电视", "scene": "客厅"},
+    {"hour": 21, "decibel": 38, "light": 5, "temperature": 22, "sound_type": "音乐", "scene": "书房阅读"},
+    {"hour": 22, "decibel": 32, "light": 2, "temperature": 20, "sound_type": "水声", "scene": "浴室"},
+    {"hour": 23, "decibel": 28, "light": 0, "temperature": 19, "sound_type": "寂静", "scene": "睡前卧室"}
+  ]
+}
