@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Data Garden</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgogIDxmaWx0ZXIgaWQ9Im5vaXNlIj4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIuNzUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIC8+CiAgICA8ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIiAvPgogIDwvZmlsdGVyPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIC8+Cjwvc3ZnPg==');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .ink-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .ink-spot {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 100, 100, 0.3) 0%, rgba(50, 50, 50, 0.1) 50%, transparent 70%);
+            animation: inkSplash 3s ease-out forwards;
+        }
+        
+        @keyframes inkSplash {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .garden-container {
+            text-align: center;
+            max-width: 900px;
+            min-height: 70vh;
+            padding: 60px;
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(150, 150, 150, 0.3);
+            opacity: 0;
+            animation: containerFadeIn 2s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .garden-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(150, 150, 150, 0.2);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .garden-title {
+            font-size: 64px;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+            font-family: 'Cormorant Garamond', serif;
+            display: inline-block;
+            animation: titleAnimate 4s ease-out forwards;
+            position: relative;
+        }
+        
+        .garden-title::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 100, 100, 0.4) 0%, rgba(50, 50, 50, 0.2) 40%, transparent 70%);
+            animation: titleInkSplash 3s ease-out forwards;
+            z-index: -1;
+        }
+        
+        .garden-poem {
+            font-size: 20px;
+            color: #d0d0d0;
+            margin: 20px 0 30px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1.5s forwards;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .garden-poem::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(80, 80, 80, 0.3) 0%, rgba(40, 40, 40, 0.15) 40%, transparent 70%);
+            animation: poemInkSplash 2.5s ease-out 1.5s forwards;
+            z-index: -1;
+        }
+        
+        .english-poem {
+            font-size: 16px;
+            color: #a0a0a0;
+            display: block;
+            margin-top: 10px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .garden-description {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 2.5s forwards;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+        
+        .garden-description::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(70, 70, 70, 0.25) 0%, rgba(35, 35, 35, 0.12) 40%, transparent 70%);
+            animation: descriptionInkSplash 2.5s ease-out 2.5s forwards;
+            z-index: -1;
+        }
+        
+        .rect-button {
+            width: 240px;
+            height: 60px;
+            border-radius: 5px;
+            background: linear-gradient(45deg, #666666 0%, #999999 100%);
+            color: #e0e0e0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: buttonAnimate 2s ease-out 3s forwards;
+            z-index: 10;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .rect-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(90, 90, 90, 0.35) 0%, rgba(45, 45, 45, 0.18) 40%, transparent 70%);
+            animation: buttonInkSplash 2.5s ease-out 3s forwards;
+            z-index: -1;
+        }
+        
+        .rect-button:hover {
+            transform: translateY(15px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #777777 0%, #aaaaaa 100%);
+        }
+        
+        @keyframes containerFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateY(25px) scale(0.95);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
+        @keyframes titleAnimate {
+            0% {
+                opacity: 0;
+                transform: scale(1.5);
+                text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+            }
+            20% {
+                opacity: 0.2;
+                transform: scale(1.3);
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+            }
+            40% {
+                opacity: 0.4;
+                transform: scale(1.1);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            }
+            60% {
+                opacity: 0.7;
+                transform: scale(1.05);
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            }
+            80% {
+                opacity: 0.9;
+                transform: scale(1.02);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        @keyframes titleInkSplash {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes poemInkSplash {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.35;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes descriptionInkSplash {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.45;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.45);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes buttonInkSplash {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.55;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.25);
+                opacity: 0.38;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.55);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes buttonAnimate {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.9) translateY(10px);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .garden-title {
+                font-size: 48px;
+                letter-spacing: 5px;
+            }
+            
+            .garden-container {
+                padding: 30px;
+                margin: 0 20px;
+            }
+            
+            .round-button {
+                width: 150px;
+                height: 150px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .garden-title {
+                font-size: 36px;
+                letter-spacing: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ink-splash" id="inkSplash"></div>
+    <div class="garden-container">
+        <div class="content-wrapper">
+            <h1 class="garden-title">My Data Garden</h1>
+            <p class="garden-poem">
+                《诗经》草木有灵，芳华寄情，四时有序，静美无言。<br>
+                <span class="english-poem">Plants hold spirit, flowers bear emotion; all follows nature's rhythm, serene and silent.</span>
+            </p>
+            <p class="garden-description">
+                Welcome to my visual interactive project! It's all about turning abstract ideas, cultural vibes and complex info into something you can see, touch and fall in love with. Blending elegant, detailed visuals (inspired by traditional Chinese aesthetics) with smooth, simple interactions, this interface is made to feel intuitive and immersive—no fancy skills needed, just pure enjoyment as you explore. Perfect for UI display, it's designed to catch your eye and keep you engaged, one easy, beautiful interaction at a time.
+            </p>
+        </div>
+        <button class="rect-button" onclick="window.location.href='./guide.html'">Explore Garden</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inkSplash = document.getElementById('inkSplash');
+            
+            function createInkSpot(x, y, size, delay) {
+                setTimeout(function() {
+                    const spot = document.createElement('div');
+                    spot.className = 'ink-spot';
+                    spot.style.left = x + 'px';
+                    spot.style.top = y + 'px';
+                    spot.style.width = size + 'px';
+                    spot.style.height = size + 'px';
+                    inkSplash.appendChild(spot);
+                    
+                    setTimeout(function() {
+                        spot.remove();
+                    }, 3000);
+                }, delay);
+            }
+            
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            createInkSpot(windowWidth * 0.3, windowHeight * 0.3, 150, 0);
+            createInkSpot(windowWidth * 0.7, windowHeight * 0.4, 120, 500);
+            createInkSpot(windowWidth * 0.5, windowHeight * 0.6, 180, 1000);
+            createInkSpot(windowWidth * 0.2, windowHeight * 0.7, 100, 1500);
+            createInkSpot(windowWidth * 0.8, windowHeight * 0.2, 130, 2000);
+            createInkSpot(windowWidth * 0.4, windowHeight * 0.8, 110, 2500);
+            createInkSpot(windowWidth * 0.6, windowHeight * 0.3, 140, 3000);
+        });
+    </script>
+</body>
+</html>

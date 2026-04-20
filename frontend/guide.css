@@ -1,0 +1,466 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    overflow: hidden;
+    background: #0a0a0a;
+}
+
+/* 页面容器 */
+.guide-container {
+    width: 1200px;
+    height: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+/* 背景层 */
+.guide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(50,50,50,0.1) 0%, rgba(0,0,0,0.9) 100%);
+    z-index: 0;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    padding: 10px 20px;
+    background: rgba(50,50,50,0.2);
+    border: 1px solid #666;
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+    background: rgba(80,80,80,0.3);
+    border: 1px solid #999;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255,255,255,0.05);
+}
+
+/* 开始引导按钮 */
+.start-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 60px;
+    background: rgba(80,80,80,0.2);
+    border: 1px solid #666;
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.start-btn:hover {
+    background: rgba(100,100,100,0.3);
+    border: 1px solid #999;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 16px rgba(255,255,255,0.1);
+}
+
+.start-btn:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+}
+
+/* 卷轴容器 */
+.scroll-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    height: 0;
+    transition: all 1.5s ease;
+    z-index: 1;
+    animation: float 4s ease-in-out infinite;
+}
+
+.scroll-container.scroll-open {
+    opacity: 1;
+    height: 400px;
+}
+
+/* 卷轴浮动动画 */
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-10px);
+    }
+}
+
+/* 卷轴轴头 */
+.scroll-left,
+.scroll-right {
+    width: 30px;
+    height: 400px;
+    background: #3a2a1a;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* 卷轴宣纸 */
+.scroll-paper {
+    width: 1140px;
+    height: 400px;
+    background: rgba(30,30,30,0.8);
+    border: 1px solid #444;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+/* 花朵容器 */
+.flower-container {
+    width: 2400px;
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateX(1140px);
+    transition: transform 8s linear;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.flower-container.flower-move {
+    transform: translateX(-1260px);
+}
+
+/* 单朵花 */
+.flower-item {
+    width: 180px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.flower-item:hover {
+    transform: scale(1.05);
+}
+
+.flower-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.flower-item:hover .flower-img {
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.flower-text {
+    font-family: 'Cormorant Garamond', serif;
+    color: #e0e0e0;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.flower-item:hover .flower-text {
+    color: #fff;
+    font-size: 19px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* 进入花园按钮 */
+.enter-btn {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 60px;
+    background: rgba(80,80,80,0.2);
+    border: 1px solid #666;
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 5;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.enter-btn:hover {
+    background: rgba(100,100,100,0.3);
+    border: 1px solid #999;
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 16px rgba(255,255,255,0.1);
+}
+
+.enter-btn:active {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+}
+
+.enter-btn.enter-show {
+    opacity: 1;
+}
+
+/* 模态框样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid #444;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #444;
+}
+
+.modal-header h2 {
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #e0e0e0;
+    font-size: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.flower-detail {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.modal-flower-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.flower-info {
+    flex: 1;
+    color: #e0e0e0;
+}
+
+.info-item {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #b0b0b0;
+    margin-right: 10px;
+}
+
+.info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px;
+    border-top: 1px solid #444;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    background: rgba(80, 80, 80, 0.2);
+    border: 1px solid #666;
+    color: #e0e0e0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.modal-btn:hover {
+    background: rgba(100, 100, 100, 0.3);
+    border: 1px solid #999;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05);
+}
+
+.modal-btn.primary {
+    background: rgba(120, 120, 120, 0.3);
+    border: 1px solid #888;
+}
+
+/* 拖动功能样式 */
+.flower-container {
+    cursor: grab;
+    user-select: none;
+}
+
+.flower-container:active {
+    cursor: grabbing;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .guide-container {
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    .scroll-container {
+        width: 90vw;
+    }
+    
+    .scroll-left,
+    .scroll-right {
+        width: 20px;
+        height: 300px;
+    }
+    
+    .scroll-paper {
+        width: calc(90vw - 40px);
+        height: 300px;
+    }
+    
+    .flower-container {
+        width: 1800px;
+        height: 300px;
+        transform: translateX(calc(90vw - 40px));
+    }
+    
+    .flower-container.flower-move {
+        transform: translateX(-960px);
+    }
+    
+    .flower-item {
+        width: 130px;
+    }
+    
+    .flower-img {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .flower-text {
+        font-size: 14px;
+    }
+    
+    .start-btn {
+        width: 160px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .enter-btn {
+        width: 240px;
+        height: 50px;
+        font-size: 16px;
+    }
+    
+    /* 模态框移动端适配 */
+    .modal-content {
+        width: 90%;
+        max-height: 90%;
+    }
+    
+    .flower-detail {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .modal-flower-img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .modal-header h2 {
+        font-size: 20px;
+    }
+    
+    .info-item {
+        text-align: left;
+    }
+}

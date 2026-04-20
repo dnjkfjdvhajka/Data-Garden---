@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Garden - 时辰寻芳引导</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="guide.css">
+</head>
+<body>
+    <div class="guide-container">
+        <!-- 背景层 -->
+        <div class="guide-bg"></div>
+        
+        <!-- 返回按钮 -->
+        <button class="back-btn" onclick="goBack()">返回</button>
+        
+        <!-- 开始引导按钮 -->
+        <button class="start-btn" id="startBtn">开始寻芳</button>
+        
+        <!-- 卷轴容器 -->
+        <div class="scroll-container" id="scrollContainer">
+            <!-- 卷轴轴头 -->
+            <div class="scroll-left"></div>
+            <!-- 卷轴宣纸 -->
+            <div class="scroll-paper">
+                <!-- 花朵容器 -->
+                <div class="flower-container" id="flowerContainer">
+                    <!-- 12朵花 -->
+                    <div class="flower-item" data-flower="子时">
+                        <img src="../1.png" alt="昙花" class="flower-img">
+                        <div class="flower-text">子时 · 昙花</div>
+                    </div>
+                    <div class="flower-item" data-flower="丑时">
+                        <img src="../2.png" alt="牵牛花" class="flower-img">
+                        <div class="flower-text">丑时 · 牵牛花</div>
+                    </div>
+                    <div class="flower-item" data-flower="寅时">
+                        <img src="../3.png" alt="木槿" class="flower-img">
+                        <div class="flower-text">寅时 · 木槿</div>
+                    </div>
+                    <div class="flower-item" data-flower="卯时">
+                        <img src="../4.png" alt="桃花" class="flower-img">
+                        <div class="flower-text">卯时 · 桃花</div>
+                    </div>
+                    <div class="flower-item" data-flower="辰时">
+                        <img src="../5.png" alt="兰草" class="flower-img">
+                        <div class="flower-text">辰时 · 兰草</div>
+                    </div>
+                    <div class="flower-item" data-flower="巳时">
+                        <img src="../6.png" alt="芍药" class="flower-img">
+                        <div class="flower-text">巳时 · 芍药</div>
+                    </div>
+                    <div class="flower-item" data-flower="午时">
+                        <img src="../7.png" alt="莲花" class="flower-img">
+                        <div class="flower-text">午时 · 莲花</div>
+                    </div>
+                    <div class="flower-item" data-flower="未时">
+                        <img src="../8.png" alt="月季" class="flower-img">
+                        <div class="flower-text">未时 · 月季</div>
+                    </div>
+                    <div class="flower-item" data-flower="申时">
+                        <img src="../9.png" alt="茉莉" class="flower-img">
+                        <div class="flower-text">申时 · 茉莉</div>
+                    </div>
+                    <div class="flower-item" data-flower="酉时">
+                        <img src="../10.png" alt="桂花" class="flower-img">
+                        <div class="flower-text">酉时 · 桂花</div>
+                    </div>
+                    <div class="flower-item" data-flower="戌时">
+                        <img src="../11.png" alt="萱草" class="flower-img">
+                        <div class="flower-text">戌时 · 萱草</div>
+                    </div>
+                    <div class="flower-item" data-flower="亥时">
+                        <img src="../12.png" alt="夜来香" class="flower-img">
+                        <div class="flower-text">亥时 · 夜来香</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 卷轴轴头 -->
+            <div class="scroll-right"></div>
+        </div>
+        
+        <!-- 进入花园按钮 -->
+        <button class="enter-btn" id="enterBtn">进入花园，探索感官数据</button>
+    </div>
+    
+    <!-- 花朵详细信息模态框 -->
+    <div class="modal" id="flowerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">花朵信息</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="flower-detail">
+                    <img id="modalFlowerImg" src="" alt="花朵图片" class="modal-flower-img">
+                    <div class="flower-info">
+                        <div class="info-item">
+                            <span class="info-label">时辰：</span>
+                            <span id="modalTime" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">古籍：</span>
+                            <span id="modalAncient" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">气质：</span>
+                            <span id="modalTemperament" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">主导感官：</span>
+                            <span id="modalMainSenses" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">次感官：</span>
+                            <span id="modalSecondarySenses" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">感官解读：</span>
+                            <span id="modalInterpretation" class="info-value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal()">关闭</button>
+                <button class="modal-btn primary" onclick="goToGarden()">进入花园</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="guide.js"></script>
+</body>
+</html>
